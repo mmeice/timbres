@@ -40,6 +40,11 @@ class Timbre
      */
     private $valeur;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Pays::class, inversedBy="timbres")
+     */
+    private $pays;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +94,18 @@ class Timbre
     public function setValeur(float $valeur): self
     {
         $this->valeur = $valeur;
+
+        return $this;
+    }
+
+    public function getPays(): ?Pays
+    {
+        return $this->pays;
+    }
+
+    public function setPays(?Pays $pays): self
+    {
+        $this->pays = $pays;
 
         return $this;
     }

@@ -10,7 +10,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $t1 = new Timbre();
+        /* $t1 = new Timbre();
         $t1->setNom("Penny black")
             ->setAnnee(1840)
             ->setImage("collection/onePenny.png")
@@ -45,6 +45,6 @@ class AppFixtures extends Fixture
             ->setValeur(75000);
         $manager->persist($t5);
 
-        $manager->flush();
+        $manager->flush(); */
     }
 }

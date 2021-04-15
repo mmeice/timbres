@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification{% endblock %}
+
+{% block monTitre %}
+Modification {{timbres.nom}}
+{% endblock %}
+
+{% block body %}
+{{form_start(form)}}
+<div class="row">
+    <img src="{{asset('images/' ~ timbres.image)}}" style="width:25%">
+</div>
+<div>{{ form_row(form.nom, {"attr" : {}, "label":"Nom ou description du timbre"})}}</div>
+    {{form_widget(form)}}
+    <input type="submit" class="btn btn-primary" value="Enregistrer">
+{{form_end(form)}}
+
+
+{% endblock %}

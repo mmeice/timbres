@@ -24,7 +24,7 @@ Page d'administration
         <td>{{timbre.annee}}</td>
         <td>{{timbre.valeur}}</td>
         <td>
-            <a class="btn btn-secondary" href="">Modifier</a>
+            <a class="btn btn-secondary" href="{{path('admin_timbres_modification',{'id' : timbre.id})}}">Modifier</a>
             <a class="btn btn-danger" href="">Supprimer</a>
             </form>
         </td>

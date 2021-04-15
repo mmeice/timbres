@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TimbreRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TimbreRepository::class)
@@ -19,6 +20,7 @@ class Timbre
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=3,max=30,minMessage="Le nom doit contenir min 3 caractères",maxMessage="Le nom doit contenir maximum 30 caractères")
      */
     private $nom;
 
@@ -34,6 +36,7 @@ class Timbre
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Range(min=0.1)
      */
     private $valeur;
 

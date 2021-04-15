@@ -41,7 +41,7 @@ class AppFixtures extends Fixture
         $t5 = new Timbre();
         $t5->setNom("Termonde renversé")
             ->setAnnee(1920)
-            ->setImage("collection/Belgique.png")
+            ->setImage("collection/Belgique.jpg")
             ->setValeur(75000);
         $manager->persist($t5);
 

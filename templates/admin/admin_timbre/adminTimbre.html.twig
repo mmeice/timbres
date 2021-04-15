@@ -19,6 +19,7 @@ Page d'administration
     <tr class="table-primary">
         <td>Image</td>
         <td>Nom</td>
+        <td>Pays</td>
         <td>Annee</td>
         <td>Valeur</td>
         <td>Actions</td>
@@ -27,6 +28,7 @@ Page d'administration
     <tr>
         <td><img src="{{asset('images/' ~ timbre.image)}}" class="perso_imgTimbreAdmin"></td>
         <td><strong>{{timbre.nom}}</strong></td>
+        <td><strong>{{timbre.pays.nom}}</strong></td>
         <td>{{timbre.annee}}</td>
         <td>{{timbre.valeur}}</td>
         <td>

@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Pays;
 use App\Entity\Timbre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TimbreType extends AbstractType
@@ -16,6 +18,10 @@ class TimbreType extends AbstractType
             ->add('annee')
             ->add('image')
             ->add('valeur')
+            ->add('pays',EntityType::class,[
+                'class' => Pays::class,
+                'choice_label' => 'nom'
+            ])
         ;
     }
 

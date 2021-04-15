@@ -15,6 +15,31 @@ class TimbreController extends AbstractController
         $timbres = $repository->findAll();
         return $this->render('timbre/timbres.html.twig', [
             'timbres' => $timbres,
+            'isAnnee' => false,
+            'isValeur' => false
         ]);
     }
+
+    #[Route('/timbres/annee/{annee}', name: 'timbresAvantDate')]
+    public function timbresAvant(TimbreRepository $repository, $annee): Response
+    {
+        $timbres = $repository->getTimbreParPropriete('annee','<',$annee);
+        return $this->render('timbre/timbres.html.twig', [
+            'timbres' => $timbres,
+            'isAnnee' => true,
+            'isValeur' => false
+        ]);
+    }
+
+    #[Route('/timbres/valeur/{valeur}', name: 'timbresValeurMax')]
+    public function timbresValeurMax(TimbreRepository $repository, $valeur): Response
+    {
+        $timbres = $repository->getTimbreParPropriete('valeur','<',$valeur);
+        return $this->render('timbre/timbres.html.twig', [
+            'timbres' => $timbres,
+            'isAnnee' => false,
+            'isValeur' => true
+        ]);
+    }
+
 }

@@ -19,6 +19,17 @@ class TimbreRepository extends ServiceEntityRepository
         parent::__construct($registry, Timbre::class);
     }
 
+    public function getTimbreParPropriete($propriete, $signe, $valeur) {
+        return $this->createQueryBuilder('t')
+        ->andWhere('t.' .$propriete. ' '. $signe.' :val')
+        ->setParameter('val', $valeur) //variable pour protéger injections sql
+//        ->orderBy('t.annee', 'ASC')
+        ->getQuery()
+        ->getResult()
+    ;
+    }
+
+
     // /**
     //  * @return Timbre[] Returns an array of Timbre objects
     //  */

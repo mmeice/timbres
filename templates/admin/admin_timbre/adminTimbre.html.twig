@@ -8,6 +8,12 @@ Page d'administration
 
 {% block body %}
 
+{% for message in app.flashes('success') %} <!-- Affichage du message de succès stocké en session-->
+    <div class='alert alert-success'>
+        {{message}}
+    </div>
+{% endfor %}
+
 <a class="btn btn-success" href="{{path('admin_timbres_creation')}}">Ajouter</a>
 <table class="table">
     <tr class="table-primary">

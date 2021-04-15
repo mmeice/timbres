@@ -34,8 +34,10 @@ class AdminTimbreController extends AbstractController
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            $modif = $timbre->getId() !== null;
             $entityManager->persist($timbre);
             $entityManager->flush();
+            $this->addFlash("success", ($modif) ? "La modification a été effectuée" : "L'ajout a été effectué"); //mise en session du message
             return $this->redirectToRoute("admin_timbres");
 
         }
@@ -52,7 +54,8 @@ class AdminTimbreController extends AbstractController
     {
         if($this->isCsrfTokenValid("SUP". $timbre->getId(),$request->get('_token'))){
             $entityManager->remove($timbre);
-            $entityManager->flush();      
+            $entityManager->flush();
+            $this->addFlash("success","La suppression a été effectuée");      
             return $this->redirectToRoute('admin_timbres');
         }
        

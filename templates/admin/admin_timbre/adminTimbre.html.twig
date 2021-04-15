@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block monTitre %}
+Page d'administration
+{% endblock %}
+
+{% block body %}
+
+<a class="btn btn-success" href="">Ajouter</a>
+<table class="table">
+    <tr class="table-primary">
+        <td>Image</td>
+        <td>Nom</td>
+        <td>Annee</td>
+        <td>Valeur</td>
+        <td>Actions</td>
+    </tr>
+    {% for timbre in timbres %}
+    <tr>
+        <td><img src="{{asset('images/' ~ timbre.image)}}" class="perso_imgTimbreAdmin"></td>
+        <td><strong>{{timbre.nom}}</strong></td>
+        <td>{{timbre.annee}}</td>
+        <td>{{timbre.valeur}}</td>
+        <td>
+            <a class="btn btn-secondary" href="">Modifier</a>
+            <a class="btn btn-danger" href="">Supprimer</a>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+
+{% endblock %}

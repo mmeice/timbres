@@ -22,9 +22,14 @@ class AdminTimbreController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/timbres/creation', name: 'admin_timbres_creation')]
     #[Route('/admin/timbres/{id}', name: 'admin_timbres_modification')]
-    public function modification(Timbre $timbre, Request $request, EntityManagerInterface $entityManager): Response
+    public function AjoutEtModif(Timbre $timbre = null, Request $request, EntityManagerInterface $entityManager): Response
     {
+        if(!$timbre) {
+            $timbre = new Timbre();
+        }
+        
         $form = $this->createForm(TimbreType::class,$timbre); //theme form = bootstrap -> config/packages/twig.yaml
 
         $form->handleRequest($request);
@@ -35,9 +40,10 @@ class AdminTimbreController extends AbstractController
 
         }
 
-        return $this->render('admin/admin_timbre/modificationTimbre.html.twig', [
+        return $this->render('admin/admin_timbre/modifEtAjout.html.twig', [
             'timbres' => $timbre,
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "isModification" => $timbre->getId() !== null //$timbre->getId() si n'existe pas = true | si existe = false -> timbre->getId() n'existe pas sur l'ajout
         ]);
     }
 }

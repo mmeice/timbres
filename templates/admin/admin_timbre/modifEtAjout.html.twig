@@ -3,7 +3,11 @@
 {% block title %}Modification{% endblock %}
 
 {% block monTitre %}
-Modification {{timbres.nom}}
+{% if isModification %}
+    Modification {{timbres.nom}}
+{% else %}
+    Ajout d'un timbre
+{% endif %}
 {% endblock %}
 
 {% block body %}

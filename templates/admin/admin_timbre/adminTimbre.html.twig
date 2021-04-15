@@ -24,8 +24,12 @@ Page d'administration
         <td>{{timbre.annee}}</td>
         <td>{{timbre.valeur}}</td>
         <td>
-            <a class="btn btn-secondary" href="{{path('admin_timbres_modification',{'id' : timbre.id})}}">Modifier</a>
-            <a class="btn btn-danger" href="">Supprimer</a>
+        <a class="btn btn-secondary" href="{{path('admin_timbres_modification',{'id' : timbre.id})}}">Modifier</a>
+            <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" style="display:inline-block" action="{{path('admin_timbre_suppression', {'id' : timbre.id})}}">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ timbre.id)}}">
+                <!-- Protection de la suppression grace à la génération d'un token pour s'assurer que l'action est bien effectuée depuis ce formulaire et ce bouton -->
+                <input type="submit" class="btn btn-danger" value="Supprimer">
             </form>
         </td>
     </tr>

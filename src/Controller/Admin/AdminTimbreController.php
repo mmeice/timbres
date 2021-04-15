@@ -23,7 +23,7 @@ class AdminTimbreController extends AbstractController
     }
 
     #[Route('/admin/timbres/creation', name: 'admin_timbres_creation')]
-    #[Route('/admin/timbres/{id}', name: 'admin_timbres_modification')]
+    #[Route('/admin/timbres/{id}', name: 'admin_timbres_modification', methods:['GET','POST'])]
     public function AjoutEtModif(Timbre $timbre = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if(!$timbre) {
@@ -45,5 +45,16 @@ class AdminTimbreController extends AbstractController
             "form" => $form->createView(),
             "isModification" => $timbre->getId() !== null //$timbre->getId() si n'existe pas = true | si existe = false -> timbre->getId() n'existe pas sur l'ajout
         ]);
+    }
+
+    #[Route('/admin/timbres/{id}', name: 'admin_timbre_suppression', methods:['delete'])]
+    public function suppression(Timbre $timbre = null, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if($this->isCsrfTokenValid("SUP". $timbre->getId(),$request->get('_token'))){
+            $entityManager->remove($timbre);
+            $entityManager->flush();      
+            return $this->redirectToRoute('admin_timbres');
+        }
+       
     }
 }

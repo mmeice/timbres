@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminSecuController extends AbstractController
 {
@@ -34,9 +35,12 @@ class AdminSecuController extends AbstractController
     }
 
     #[Route('/login', name: 'connexion')]
-    public function login(): Response
+    public function login(AuthenticationUtils $util): Response //injection de AuthenticationUtils pour récupérer le message lors d'un mauvais login
     {
-        return $this->render("admin_secu/login.html.twig");
+        return $this->render("admin_secu/login.html.twig",[
+            "lastUserName" => $util->getLastUsername(),
+            "error" => $util->getLastAuthenticationError()
+        ]);
     }
 
     #[Route('/deconnexion', name: 'deconnexion')]

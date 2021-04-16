@@ -28,10 +28,12 @@
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{{path("timbres")}}">Timbres</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
                       <li><hr class="dropdown-divider"></li>
                       <li>
                         <a class="dropdown-item" href="{{path("admin_timbres")}}">Administration</a>
                       </li>
+                      {% endif %}
                   </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -40,21 +42,27 @@
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{{path("pays")}}">Pays</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
                       <li><hr class="dropdown-divider"></li>
                       <li>
                         <a class="dropdown-item" href="{{path("admin_pays")}}">Administration</a>
                       </li>
+                    {% endif %}
                   </ul>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{path('inscription')}}">Inscription</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{path('connexion')}}">Login</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{path('deconnexion')}}">Logout</a>
-                </li>
+
+                {% if not app.user %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{path('inscription')}}">Inscription</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{path('connexion')}}">Login</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{path('deconnexion')}}">Logout</a>
+                    </li>
+                {% endif %}
               </ul>
             </div>
         </nav>

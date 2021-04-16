@@ -5,7 +5,12 @@
     Login 
 {% endblock %}
 {% block body %}
-
+{% if error %}
+<div class="alert alert-danger">
+<!--     La combinaison login/password est incorrecte -->
+    {{error.messageKey | trans(error.messagedata, 'security')}}
+</div>
+{% endif %}
 <form action="{{path('connexion')}}" method="post">
     <div class="form-group">
         <label>Login : </label>

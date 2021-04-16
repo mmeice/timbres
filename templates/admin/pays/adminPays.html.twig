@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration Pays{% endblock %}
+
+{% block monTitre %}
+Page d'administration Pays
+{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %} <!-- Affichage du message de succès stocké en session-->
+    <div class='alert alert-success'>
+        {{message}}
+    </div>
+{% endfor %}
+
+<a class="btn btn-success" href="{{path('ajout_pays')}}">Ajouter</a>
+<table class="table">
+    <tr class="table-primary">
+        <td>Image</td>
+        <td>Nom</td>
+        <td>Actions</td>
+    </tr>
+    {% for pays in pays %}
+    <tr>
+        <td><img src="{{asset('images/pays/' ~ pays.image)}}" class="perso_imgTimbreAdmin"></td>
+        <td><strong>{{pays.nom}}</strong></td>
+
+        <td>
+        <a class="btn btn-secondary" href="{{path('modif_pays',{'id': pays.id})}}">Modifier</a>
+            <form method="POST" onsubmit="return confirm('Confirmer la suppression ?')" style="display:inline-block" action="{{path('sup_pays',{'id':pays.id})}}">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ pays.id)}}">
+                <!-- Protection de la suppression grace à la génération d'un token pour s'assurer que l'action est bien effectuée depuis ce formulaire et ce bouton -->
+                <input type="submit" class="btn btn-danger" value="Supprimer">
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+
+{% endblock %}

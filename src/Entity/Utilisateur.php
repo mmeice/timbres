@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UtilisateurRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert; //https://symfony.com/doc/current/validation.html
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
+ * @UniqueEntity(
+ * fields={"username"},
+ * message="L'utilisateur existe déjà"
+ * )
  */
 class Utilisateur
 {
@@ -19,14 +25,19 @@ class Utilisateur
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=5,max=10,minMessage="Il faut au moins 5 caractères",maxMessage="Il faut au plus 10 caractères")
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=5,max=10,minMessage="Il faut au moins 5 caractères",maxMessage="Il faut au plus 10 caractères")
      */
     private $password;
 
+    /**
+     * @Assert\EqualTo(propertyPath="password",message="Les mots de passe ne sont pas équivalents")
+     */
     private $verificationPassword;
 
     public function getId(): ?int

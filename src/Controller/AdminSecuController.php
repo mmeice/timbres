@@ -24,6 +24,7 @@ class AdminSecuController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $passwordCrypte = $encoder->encodePassword($utilisateur,$utilisateur->getPassword()); //chiffrement du pass grace à l'implémentation de l'interface utilisateur (Entity Utilisateur) 
             $utilisateur->setPassword($passwordCrypte); //le pass introduit par l'utilisateur est remplacé par celui qui revient chiffré
+            $utilisateur->setRoles("");
             $em->persist($utilisateur);
             $em->flush();
             return $this->redirectToRoute("timbres");

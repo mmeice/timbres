@@ -104,9 +104,9 @@ class Utilisateur implements UserInterface
         return [$this->roles]; //après rajout de la notion de roles dans l'entité Utilisateur et en DB 
     }
 
-    public function setRoles(?string $roles): self
+    public function setRoles(?string $roles)
     {
-        if($roles === null) { //si le seter reçoit un role null (lors de l'inscription) on considèrera que c'est un ROLE_USER
+        if($roles === "") { //si le seter reçoit un role null (lors de l'inscription) on considèrera que c'est un ROLE_USER
             $this->roles = "ROLE_USER";
         } else {
             $this->roles = $roles; //sinon, on update le rôle avec celui reçu

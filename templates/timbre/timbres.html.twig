@@ -12,9 +12,11 @@
 {% endblock %}
 
 {% block body %}
+{% if app.user %}
 <a class="btn btn-primary" href="{{path("timbres")}}">Tous</a>
 <a class="btn btn-primary" href="{{path("timbresAvantDate",{"annee":1900})}}">Publié(s) avant 1900</a>
 <a class="btn btn-primary" href="{{path("timbresValeurMax",{"valeur":10000})}}">Valorisé(s) à moins de 10000 €</a>
+{% endif %}
 <div class="row">
     {% for timbre in timbres %}
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">

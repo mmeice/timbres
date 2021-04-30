@@ -83,7 +83,7 @@ class Utilisateur implements UserInterface
 
     public function setVerificationPassword(string $verificationPassword): self
     {
-        $this->password = $verificationPassword;
+        $this->verificationPassword = $verificationPassword;
 
         return $this;
     }

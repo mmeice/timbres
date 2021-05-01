@@ -1,0 +1,3 @@
+- Upload de fichiers (https://github.com/dustin10/VichUploaderBundle)
+- Administration des users et rôles
+- erreur404
